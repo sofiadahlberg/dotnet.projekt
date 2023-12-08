@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sofia Dahlberg\\OneDrive\\Dokument\\Webbutvecklare\\c# .net\\projekt\\projekt.csproj",
+      "projectUniqueName": "C:\\Users\\Sofia Dahlberg\\OneDrive\\Dokument\\Webbutvecklare\\c# .net\\projekt\\dotnet.projekt\\projekt.csproj",
       "projectName": "projekt",
-      "projectPath": "C:\\Users\\Sofia Dahlberg\\OneDrive\\Dokument\\Webbutvecklare\\c# .net\\projekt\\projekt.csproj",
+      "projectPath": "C:\\Users\\Sofia Dahlberg\\OneDrive\\Dokument\\Webbutvecklare\\c# .net\\projekt\\dotnet.projekt\\projekt.csproj",
       "packagesPath": "C:\\Users\\Sofia Dahlberg\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sofia Dahlberg\\OneDrive\\Dokument\\Webbutvecklare\\c# .net\\projekt\\obj\\",
+      "outputPath": "C:\\Users\\Sofia Dahlberg\\OneDrive\\Dokument\\Webbutvecklare\\c# .net\\projekt\\dotnet.projekt\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -324,7 +324,7 @@ class City
 
         Random random = new Random(); // Create a Random object
 
-        City city = new City(60, 10, 23, 15, 10);
+        City city = new City(40, 10, 23, 15, 10);
         // Adding a new citizen after city creation using the AddCitizen method
         Citizen newCitizen = new Citizen(random.Next(city.Width), random.Next(city.Height), random); // Example position
         city.AddCitizen(newCitizen);
