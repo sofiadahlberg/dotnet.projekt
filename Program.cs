@@ -15,6 +15,7 @@ public enum Direction
 }
 
 //Base class for Citizen, Police and Thief
+//with position and coordinates as properties
 class Entity
 {
     public Position Position { get; set; }
@@ -23,7 +24,7 @@ class Entity
         Position = new Position(x, y);
     }
 }
-// Class to represent the position in 2D space, x and y- coordinates
+// Class to represent the position, x and y- coordinates
 class Position
 {
     public int X { get; set; }
@@ -39,7 +40,7 @@ class Position
         return X == other.X && Y == other.Y;
     }
 }
-// Class Citizen, Police and Thief that inheris from entity class
+// Inherits Class Citizen, Police and Thief that inheris from entity class
 class Citizen : Entity
 {
     public Direction Direction { get; set; }
@@ -53,7 +54,7 @@ class Citizen : Entity
 class Police : Entity
 {
     public List<string> Inventory { get; }
-    public Direction Direction { get; set; } // Include the Direction property
+    public Direction Direction { get; set; }
 
     public Police(int x, int y, Random random) : base(x, y)
     {
@@ -113,17 +114,17 @@ class City
             thiefList.Add(new Thief(random.Next(Width), random.Next(Height), this.random));
         }
     }
-
-    public List<Police> Polices //Read-only
+    //Read-only for Police and Thief
+    public List<Police> Polices
     {
         get { return policeList; }
     }
 
-    public List<Thief> Thieves //Read-only
+    public List<Thief> Thieves
     {
         get { return thiefList; }
     }
-
+    //Metohds to add police, citizen and thief
     public void AddPolice(Police newPolice)
     {
         policeList.Add(newPolice);
@@ -162,7 +163,7 @@ class City
     private void MoveUp(Entity entity)
     {
         entity.Position = new Position(entity.Position.X, (entity.Position.Y - 1 + Height) % Height);
-        // ... (similar adjustments for other directions)
+
     }
 
     private void MoveDown(Entity entity)
@@ -193,7 +194,6 @@ class City
             case 'P':
                 Console.ForegroundColor = ConsoleColor.Blue;
                 break;
-            // Add more cases for other characters if needed
 
             default:
                 Console.ForegroundColor = originalForeground;
@@ -219,8 +219,8 @@ class City
     }
     private void Count()
     {
-        Console.SetCursorPosition(0, Height + 2); // Set cursor position to a new line below the city map
-                                                  // Output the message
+        Console.SetCursorPosition(0, Height + 2);
+
         Console.WriteLine($"A police officer met a citizen: {policeMetCitizenCount}");
         Console.WriteLine($"A police officer took a thief to jail: {policeMetThief}");
         Console.WriteLine($"Thief took an item from a citizen: {ThiefRobbedCitizen}");
@@ -241,9 +241,9 @@ class City
 
         foreach (Citizen citizen in citizens)
         {
-            // Simulate citizen movement in console (for example, randomly moving them within the city)
+            // Simulate citizen movement in console 
             int direction = (int)citizen.Direction;
-            // Move the citizen based on the new direction
+            // Move the citizen that is based on new direction
             MoveInDirection(citizen, direction);
             // Update city map with citizens
             cityMap[citizen.Position.Y, citizen.Position.X] = 'C';
@@ -251,7 +251,7 @@ class City
 
             foreach (Police police in policeList)
             {
-                // If police and citizen are at the same place
+                // If police and citizen are at the same place add +1 to counting
                 if (police.Position.X == citizen.Position.X && police.Position.Y == citizen.Position.Y)
                 {
                     policeMetCitizenCount++;
@@ -263,7 +263,7 @@ class City
 
                 if (thief.Position.X == citizen.Position.X && thief.Position.Y == citizen.Position.Y)
                 {
-
+                    //Then add +1 to counting
                     ThiefRobbedCitizen++;
                     foreach (string item in citizen.Inventory)
                     {
@@ -281,7 +281,7 @@ class City
         {
             int direction = (int)thief.Direction;
             MoveInDirection(thief, direction);
-            cityMap[thief.Position.Y, thief.Position.X] = 'T'; // Update city map for thieves
+            cityMap[thief.Position.Y, thief.Position.X] = 'T';
 
         }
 
@@ -292,12 +292,12 @@ class City
 
             // Move the police based on the new direction
             MoveInDirection(police, direction);
-            // Update city map with police officers
+
             cityMap[police.Position.Y, police.Position.X] = 'P';
 
             foreach (Thief thief in thiefList)
             {
-
+                //If thief meets police add +1 to counting
                 if (thief.Position.X == police.Position.X && thief.Position.Y == police.Position.Y)
                 {
                     policeMetThief++;
@@ -305,27 +305,27 @@ class City
 
                     foreach (string item in thief.Inventory)
                     {
-                        police.Inventory.Add(item); // Police takes all items
+                        police.Inventory.Add(item); // Police takes all items from thief
                     }
-                    thief.Inventory.Clear();
+                    thief.Inventory.Clear(); // The whole inventory is cleared from the thiefs
                 }
             }
         }
         // Print the city map to the console
         PrintCityMap(cityMap);
-        Count(); // Print the police met citizen count
+        Count();
     }
 
     static void Main()
     {
-         Console.Clear(); // Clear the console screen
+        Console.Clear(); // Clear the console screen
         Console.WriteLine("-----Welcome to the game 'The City'. Press any key to start...-----");
-    Console.ReadKey(); // Wait for any key press before starting the simulation
+        Console.ReadKey(); // Wait for any key press before starting the simulation
 
-        Random random = new Random(); // Create a Random object
-
+        Random random = new Random();
+        // Create new city width -40, length 10, 23 citizens, 15 polices and 10 thiefs
         City city = new City(40, 10, 23, 15, 10);
-        // Adding a new citizen after city creation using the AddCitizen method
+        // Adding a new citizen 
         Citizen newCitizen = new Citizen(random.Next(city.Width), random.Next(city.Height), random); // Example position
         city.AddCitizen(newCitizen);
         // Adding a new police officer with a random position
@@ -335,9 +335,9 @@ class City
         // Adding a new thief with a random position
         Thief newThief = new Thief(random.Next(city.Width), random.Next(city.Height), random);
         city.AddThief(newThief);
-
+        // How many laps the game continues
         int numberOfIterations = 12;
-        int delayBetweenIterations = 500;  // Define the number of iterations
+        int delayBetweenIterations = 500;  // how long the delay is between every lap
         for (int i = 0; i < numberOfIterations; i++)
         {
             city.Simulate();
