@@ -1,4 +1,11 @@
-﻿using System;
+﻿/* Sofia Dahlberg
+Webbutvecklingsprogrammet 
+DT071G Projekt
+2023-12-30
+*/
+
+
+using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Security.Cryptography;
@@ -141,7 +148,7 @@ class City
     }
 
     //Get every entity in random directions
-    private void MoveInDirection(Entity entity, int direction)
+    private void InDirection(Entity entity, int direction)
     {
         switch ((Direction)direction)
         {
@@ -244,7 +251,7 @@ class City
             // Simulate citizen movement in console 
             int direction = (int)citizen.Direction;
             // Move the citizen that is based on new direction
-            MoveInDirection(citizen, direction);
+            InDirection(citizen, direction);
             // Update city map with citizens
             cityMap[citizen.Position.Y, citizen.Position.X] = 'C';
 
@@ -280,7 +287,7 @@ class City
         foreach (Thief thief in thiefList)
         {
             int direction = (int)thief.Direction;
-            MoveInDirection(thief, direction);
+            InDirection(thief, direction);
             cityMap[thief.Position.Y, thief.Position.X] = 'T';
 
         }
@@ -291,7 +298,7 @@ class City
             int direction = (int)police.Direction;
 
             // Move the police based on the new direction
-            MoveInDirection(police, direction);
+            InDirection(police, direction);
 
             cityMap[police.Position.Y, police.Position.X] = 'P';
 
@@ -318,14 +325,14 @@ class City
 
     static void Main()
     {
-        Console.Clear(); // Clear the console screen
+        Console.Clear(); // Clear
         Console.WriteLine("-----Welcome to the game 'The City'. Press any key to start...-----");
-        Console.ReadKey(); // Wait for any key press before starting the simulation
+        Console.ReadKey(); 
 
         Random random = new Random();
         // Create new city width -40, length 10, 23 citizens, 15 polices and 10 thiefs
         City city = new City(40, 10, 23, 15, 10);
-        // Adding a new citizen 
+        // new citizen 
         Citizen newCitizen = new Citizen(random.Next(city.Width), random.Next(city.Height), random); // Example position
         city.AddCitizen(newCitizen);
         // Adding a new police officer with a random position
